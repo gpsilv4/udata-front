@@ -34,7 +34,7 @@ bower
 /instance/
 /static/
 node_modules
-/udata_front/theme/gouvfr/static/
+/udata_front/theme/gouvpt/static/
 
 # Installer logs
 pip-log.txt

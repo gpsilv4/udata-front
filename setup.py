@@ -41,7 +41,7 @@ setup(
     install_requires=get_requirements(),
     entry_points={
         'udata.themes': [
-            'gouvfr = udata_front.theme.gouvfr',
+            'gouvpt = udata_front.theme.gouvpt',
         ],
         'udata.models': [
             'front = udata_front.models',
