@@ -120,11 +120,11 @@ msgid "Organizations"
 msgstr "Organizações"
 
 #: udata_front/theme/gouvpt/__init__.py:49
-msgid "Getting started on data.gouv.pt"
+msgid "Getting started on data.gouv.fr"
 msgstr "Introdução a dados.gov.pt"
 
 #: udata_front/theme/gouvpt/__init__.py:51
-msgid "What is data.gouv.pt?"
+msgid "What is data.gouv.fr?"
 msgstr "O que é dados.gov.pt ?"
 
 #: udata_front/theme/gouvpt/__init__.py:56

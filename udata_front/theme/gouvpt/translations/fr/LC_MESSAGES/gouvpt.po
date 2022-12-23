@@ -121,11 +121,11 @@ msgstr "Organisations"
 
 #: udata_front/theme/gouvpt/__init__.py:49
 msgid "Getting started on data.gouv.fr"
-msgstr "Commencer sur data.gouv.fr"
+msgstr "Commencer sur dados.gov.pt"
 
 #: udata_front/theme/gouvpt/__init__.py:51
 msgid "What is data.gouv.fr?"
-msgstr "Qu'est-ce que data.gouv.fr ?"
+msgstr "Qu'est-ce que dados.gov.pt ?"
 
 #: udata_front/theme/gouvpt/__init__.py:56
 msgid "How to publish data ?"
@@ -334,7 +334,7 @@ msgstr "Ouvrir le menu"
 
 #: udata_front/theme/gouvpt/templates/header.html:59
 msgid "Go back to home page"
-msgstr "Retourner à l'accueil de data.gouv.fr"
+msgstr "Retourner à l'accueil de dados.gov.pt"
 
 #: udata_front/theme/gouvpt/templates/header.html:89
 msgid "Administration"
