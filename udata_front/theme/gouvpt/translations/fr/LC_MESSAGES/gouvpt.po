@@ -379,8 +379,8 @@ msgid "home"
 msgstr "accueil"
 
 #: udata_front/theme/gouvpt/templates/home.html:18
-msgid "Open platform for French public data"
-msgstr "Plateforme ouverte des données publiques françaises"
+msgid "Open platform for Portuguese public data"
+msgstr "Plateforme ouverte des données publiques portugais"
 
 #: udata_front/theme/gouvpt/templates/home.html:41
 msgid "All featured topics"
@@ -524,6 +524,10 @@ msgstr "Contribuez et ajoutez une nouvelle réutilisation au catalogue de ce sit
 
 #. This is a call to action.
 #: udata_front/theme/gouvpt/templates/participez/participez.html:8
+msgid "How to publish data"
+msgstr ""
+
+#. This is a call to action.
 #: udata_front/theme/gouvpt/templates/publish-action-modal.html:39
 msgid "Create or find your organization"
 msgstr "Créez ou trouvez votre organisation"
@@ -776,8 +780,8 @@ msgstr "Extras"
 #: udata_front/theme/gouvpt/templates/dataset/display.html:295
 #: udata_front/theme/gouvpt/templates/participez/participez.html:5
 #: udata_front/theme/gouvpt/templates/reuse/display.html:187
-msgid "Participate"
-msgstr "Participez"
+msgid "Contribute"
+msgstr "Contribuer"
 
 #: udata_front/theme/gouvpt/templates/dataset/display.html:298
 #: udata_front/theme/gouvpt/templates/dataset/display.html:477

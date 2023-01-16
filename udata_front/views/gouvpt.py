@@ -13,7 +13,7 @@ from udata.frontend import template_hook
 from udata.models import Reuse, Dataset
 from udata.i18n import I18nBlueprint
 
-from udata_front import APIgouvpt_EXTRAS_KEY
+from udata_front import APIGOUVPT_EXTRAS_KEY
 
 log = logging.getLogger(__name__)
 
@@ -135,13 +135,13 @@ def suivi():
 
 def has_apis(ctx):
     dataset = ctx['dataset']
-    return dataset.extras.get(APIgouvpt_EXTRAS_KEY, [])
+    return dataset.extras.get(APIGOUVPT_EXTRAS_KEY, [])
 
 
 @template_hook('dataset.display.after-description', when=has_apis)
 def dataset_apis(ctx):
     dataset = ctx['dataset']
-    return theme.render('dataset-apis.html', apis=dataset.extras.get(APIgouvpt_EXTRAS_KEY))
+    return theme.render('dataset-apis.html', apis=dataset.extras.get(APIGOUVPT_EXTRAS_KEY))
 
 
 @template_hook('oauth_authorize_theme_content')

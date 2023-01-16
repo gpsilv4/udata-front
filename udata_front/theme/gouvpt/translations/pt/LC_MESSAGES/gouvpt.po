@@ -382,7 +382,7 @@ msgid "home"
 msgstr "home"
 
 #: udata_front/theme/gouvpt/templates/home.html:18
-msgid "Open platform for French public data"
+msgid "Open platform for Portuguese public data"
 msgstr "Plataforma aberta para dados públicos portugueses"
 
 #: udata_front/theme/gouvpt/templates/home.html:41
@@ -527,6 +527,10 @@ msgstr "Contribuir e acrescentar uma nova reutilização a este catálogo do sit
 
 #. This is a call to action.
 #: udata_front/theme/gouvpt/templates/participez/participez.html:8
+msgid "How to publish data"
+msgstr "Como publicar dados"
+
+#. This is a call to action.
 #: udata_front/theme/gouvpt/templates/publish-action-modal.html:39
 msgid "Create or find your organization"
 msgstr "Crie ou encontre a sua organização"
@@ -782,8 +786,8 @@ msgstr "Extras"
 #: udata_front/theme/gouvpt/templates/dataset/display.html:295
 #: udata_front/theme/gouvpt/templates/participez/participez.html:5
 #: udata_front/theme/gouvpt/templates/reuse/display.html:187
-msgid "Participate"
-msgstr "Participar "
+msgid "Contribute"
+msgstr "Contribuir"
 
 #: udata_front/theme/gouvpt/templates/dataset/display.html:298
 #: udata_front/theme/gouvpt/templates/dataset/display.html:477
@@ -2118,6 +2122,10 @@ msgstr "Transferir"
 #: udata_front/views/site.py:209
 msgid "Community"
 msgstr "Comunidade"
+
+#: udata_front/theme/gouvpt/templates/custom/contact.html:283
+msgid "Contact"
+msgstr "Contato"
 
 #: gouvpt/theme/templates/custom/contact.html:18
 msgid "Message"

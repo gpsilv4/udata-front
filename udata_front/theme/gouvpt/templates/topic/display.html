@@ -1,5 +1,10 @@
 {% extends theme("topic/display_base.html") %}
 
+{% block breadcrumb %}
+    <li><a href="{#{ url_for('topics.list') }#}">{{ _('Topics') }}</a></li>
+    <li class="active">{{ topic.name|truncate(128) }}</li>
+{% endblock %}
+
 {% block main_content %}
 {% cache cache_duration, 'topic-content', topic.id|string, g.lang_code %}
 
@@ -8,6 +13,7 @@
         <div class="fr-grid-row">
             {# Last reuses #}
             <div class="fr-col-xs-12">
+                <!--
                 <h3><a href="{{ url_for('topics.reuses', topic=topic) }}">{{ _('Latest reuses') }}</a></h3>
                 <ul class="card-list card-list--columned">
                     {% for reuse in recent_reuses %}
@@ -17,6 +23,7 @@
                     </li>
                     {% endfor %}
                 </ul>
+                -->
             </div>
             {# End last reuses #}
         </div>
@@ -35,11 +42,13 @@
             <div class="fr-grid-row first-row">
                 <div class="fr-col-xs-12">
                     <ul class="nav nav-pills" data-tabs="tabs">
+                        <!--
                         {% for tab_id, label, _, _ in dataset_tabs %}
                         <li {% if loop.first %}class="active"{% endif %}>
                             <a href="#{{tab_id}}" data-toggle="tab">{{ label }}</a>
                         </li>
                         {% endfor %}
+                        -->
                     </ul>
                 </div>
             </div>
@@ -60,10 +69,12 @@
                         </ul>
                         <div class="clearfix"></div>
                         <p class="text-center">
+                            <!--
                             <a href="{{ url_for('topics.datasets', topic=topic) }}" class="btn btn-default btn-more">
                                 <span class="fa fa-fw fa-list" ></span>
                                 {{ _('See more datasets') }}
                             </a>
+                            -->
                         </p>
                     </div>
                     {% endfor %}

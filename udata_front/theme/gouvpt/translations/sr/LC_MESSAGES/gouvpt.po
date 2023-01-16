@@ -377,8 +377,8 @@ msgid "home"
 msgstr "početna"
 
 #: udata_front/theme/gouvpt/templates/home.html:18
-msgid "Open platform for French public data"
-msgstr "Otvorena platforma za javne podatke"
+msgid "Open platform for Portuguese public data"
+msgstr ""
 
 #: udata_front/theme/gouvpt/templates/home.html:41
 msgid "All featured topics"
@@ -522,6 +522,10 @@ msgstr "Doprinesite i dodajte novi primer upotrebe u katalog sajta."
 
 #. This is a call to action.
 #: udata_front/theme/gouvpt/templates/participez/participez.html:8
+msgid "How to publish data"
+msgstr ""
+
+#. This is a call to action.
 #: udata_front/theme/gouvpt/templates/publish-action-modal.html:39
 msgid "Create or find your organization"
 msgstr "Kreirajte ili pronađite vašu organizaciju"
@@ -773,8 +777,8 @@ msgstr "Dodaci"
 #: udata_front/theme/gouvpt/templates/dataset/display.html:295
 #: udata_front/theme/gouvpt/templates/participez/participez.html:5
 #: udata_front/theme/gouvpt/templates/reuse/display.html:187
-msgid "Participate"
-msgstr "Učestvujte"
+msgid "Contribute"
+msgstr ""
 
 #: udata_front/theme/gouvpt/templates/dataset/display.html:298
 #: udata_front/theme/gouvpt/templates/dataset/display.html:477

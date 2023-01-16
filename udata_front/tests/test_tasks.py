@@ -4,7 +4,7 @@ import pytest
 from flask import current_app
 
 from udata.core.dataset.factories import DatasetFactory
-from udata_front import APIgouvpt_EXTRAS_KEY
+from udata_front import APIGOUVPT_EXTRAS_KEY
 from udata_front.tests import gouvptSettings
 from udata_front.tasks import apigouvpt_load_apis
 
@@ -16,7 +16,7 @@ class ApigouvptTasksTest:
 
     def test_apigouvpt_load_apis(app, rmock):
         dataset = DatasetFactory()
-        url = current_app.config.get('APIgouvpt_URL')
+        url = current_app.config.get('APIGOUVPT_URL')
         apis = [{
             'title': 'une API',
             'tagline': 'tagline',
@@ -36,4 +36,4 @@ class ApigouvptTasksTest:
         rmock.get(url, json=payload)
         apigouvpt_load_apis()
         dataset.reload()
-        assert dataset.extras.get(APIgouvpt_EXTRAS_KEY) == apis
+        assert dataset.extras.get(APIGOUVPT_EXTRAS_KEY) == apis

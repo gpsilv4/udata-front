@@ -46,33 +46,47 @@ gouvpt_menu = nav.Bar('gouvpt_menu', [
     nav.Item(_('Data'), 'datasets.list'),
     nav.Item(_('Reuses'), 'reuses.list'),
     nav.Item(_('Organizations'), 'organizations.list'),
-    nav.Item(_('Getting started on data.gouv.fr'), None, items=[
+    nav.Item(_('Getting started on dados.gov.pt'), None, items=[
         nav.Item(
-            _('What is data.gouv.fr?'),
-            'gouvpt.show_page',
-            args={'slug': 'about/a-propos_data-gouv'}
+            _('Sobre dados abertos'), 
+            'gouvpt_faq.faq', 
+            {'section': 'about_opendata'}
         ),
         nav.Item(
-            _('How to publish data ?'),
-            'gouvpt.show_page',
-            args={'slug': 'onboarding/producteurs'}
+            _('Sobre o dados.gov'), 
+            'gouvpt_faq.faq', 
+            {'section': 'about_dadosgov'}
         ),
         nav.Item(
-            _('How to use data ?'),
-            'gouvpt.show_page',
-            args={'slug': 'onboarding/reutilisateurs'}
+            _('Publicar dados'), 
+            'gouvpt_faq.faq', 
+            {'section': 'publish'}
+        ),
+        nav.Item(
+            _('Reutilizar dados'), 
+            'gouvpt_faq.faq', 
+            {'section': 'reuse'}
         ),
     ]),
+    nav.Item(_('Documentação'), None, items=[
+        nav.Item(_('Licences'), 'gouvpt_faq.faq', {'section': 'licenses'}),
+        nav.Item(_('Terms of use'), 'site.terms'),
+        nav.Item(_('Acessibilidade'), 'gouvpt_faq.faq', {'section': 'acessibilidade'}),
+        nav.Item(_('API'), 'gouvpt_faq.docapi'),
+    ]),
     nav.Item(_('News'), 'posts.list'),
-    nav.Item(_('Contact us'), None, url='https://support.data.gouv.fr/'),
+    nav.Item(_('Contact us'), 'gouvpt_faq.contact'),
 ])
 
 theme.menu(gouvpt_menu)
 
 opendata_links = [
-    nav.Item(_('Featured topics'), 'gouvpt.show_page', args={'slug': 'thematiques-a-la-une'}),
-    nav.Item(_('Reference Data'), 'gouvpt.show_page', args={'slug': 'spd/reference'}),
+    #nav.Item(_('Featured topics'), 'gouvpt.show_page', args={'slug': 'thematiques-a-la-une'}),
+    #nav.Item(_('Reference Data'), 'gouvpt.show_page', args={'slug': 'spd/reference'}),
     nav.Item(_('Portal for European data'), None, url='https://data.europa.eu'),
+    nav.Item(_('Data'), 'datasets.list'),
+    nav.Item(_('Reuses'), 'reuses.list'),
+    nav.Item(_('Organizations'), 'organizations.list'),
 ]
 
 export_dataset_id = current_app.config.get('EXPORT_CSV_DATASET_ID')
@@ -85,38 +99,39 @@ if export_dataset_id:
         export_url = url_for('datasets.show', dataset=export_dataset,
                              _external=True)
         opendata_links.append(nav.Item(_('Data catalog'), None, url=export_url))
-opendata_links.append(nav.Item(_('Release notes'), 'gouvpt.show_page', args={'slug': 'nouveautes'}))
+#opendata_links.append(nav.Item(_('Release notes'), 'gouvpt.show_page', args={'slug': 'nouveautes'}))
 
 nav.Bar('gouvpt_opendata', opendata_links)
 
 
 support_links = [
-    nav.Item(_("Platform's documentation"), None, url='https://doc.data.gouv.fr'),
-    nav.Item(_("Portal's API"), None, url=current_app.config.get('API_DOC_EXTERNAL_LINK', '#')),
-    nav.Item(_('Open data guides'), None, url=current_app.config.get('ETALAB_GUIDES_URL', '#')),
-    nav.Item(_('Contact us'), None, url='https://support.data.gouv.fr'),
+    nav.Item(_("Platform's documentation"), 'gouvpt_faq.faq', {'section': 'about_opendata'}),
+    #nav.Item(_("Portal's API"), None, url=current_app.config.get('API_DOC_EXTERNAL_LINK', '#')),
+    nav.Item(_("Portal's API"), 'gouvpt_faq.docapi'),
+    #nav.Item(_('Open data guides'), None, url=current_app.config.get('ETALAB_GUIDES_URL', '#')),
+    nav.Item(_('Contact us'), 'gouvpt_faq.contact'),
 ]
 
 nav.Bar('gouvpt_support', support_links)
 
 footer_links = [
-    nav.Item(_('Licences'), 'gouvpt.show_page', args={'slug': 'legal/licences'}),
+    nav.Item(_('Licences'), 'gouvpt_faq.faq', {'section': 'licenses'}),
     nav.Item(_('Terms of use'), 'site.terms'),
-    nav.Item(_('Tracking and privacy'), 'gouvpt.suivi'),
-    nav.Item(_('Accessibility: partially compliant'),
-             'gouvpt.show_page', args={'slug': 'legal/accessibility'}),
+    #nav.Item(_('Tracking and privacy'), 'gouvpt.suivi'),
+    #nav.Item(_('Accessibility: partially compliant'),
+    #         'gouvpt.show_page', args={'slug': 'legal/accessibility'}),
+    nav.Item(_('Acessibilidade'), 'gouvpt_faq.faq', {'section': 'acessibilidade'}),
 ]
 
 nav.Bar('gouvpt_footer', footer_links)
 
 NETWORK_LINKS = [
-    ('Gouvernement.fr', 'http://www.gouvernement.fr'),
-    ('France.fr', 'http://www.france.fr'),
-    ('Legifrance.gouv.fr', 'http://www.legifrance.gouv.fr'),
-    ('Service-public.fr', 'http://www.service-public.fr'),
-    ('Opendata France', 'http://opendatafrance.net'),
-    ('CADA.fr', 'http://www.cada.fr'),
-    ('Etalab.gouv.fr', 'https://www.etalab.gouv.fr'),
+    ('República Portuguesa', 'https://www.portugal.gov.pt/pt/gc23'),
+    #('Agência para a Modernização Administrativa', 'https://www.ama.gov.pt/'),
+    ('Compete 2020', 'https://www.compete2020.gov.pt/'),
+    ('Portugal 2020', 'https://portugal2020.pt/'),
+    ('Comissão Europeia', 'https://ec.europa.eu/info/funding-tenders/find-funding/funding-management-mode/2014-2020-european-structural-and-investment-funds_pt'),
+    #('Selo de Usabilidade', 'https://selo.usabilidade.gov.pt'),
 ]
 
 nav.Bar(

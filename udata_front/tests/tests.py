@@ -24,7 +24,7 @@ from udata.utils import faker
 from udata.tests.helpers import assert200, assert404, assert_redirects, assert_equal_dates
 from udata.frontend.markdown import md
 
-from udata_front import APIgouvpt_EXTRAS_KEY
+from udata_front import APIGOUVPT_EXTRAS_KEY
 from udata_front.models import SPD, TERRITORY_DATASETS
 from udata_front.tests import gouvptSettings
 
@@ -75,7 +75,7 @@ class gouvptThemeTest:
     def test_render_dataset_w_api(self, client):
         '''It should render the dataset page'''
         dataset = DatasetFactory()
-        dataset.extras[APIgouvpt_EXTRAS_KEY] = [{
+        dataset.extras[APIGOUVPT_EXTRAS_KEY] = [{
             'title': 'une API',
             'tagline': 'tagline',
             'path': '/path',

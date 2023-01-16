@@ -9,8 +9,8 @@ from udata.core.dataset.models import Dataset
 from udata.tasks import job
 
 from udata_front import (
-    APIgouvpt_EXTRAS_KEY,
-    APIgouvpt_EXPECTED_FIELDS,
+    APIGOUVPT_EXTRAS_KEY,
+    APIGOUVPT_EXPECTED_FIELDS,
 )
 
 
@@ -24,7 +24,7 @@ def process_dataset(d_id, apis):
         dataset = get_dataset(d_id)
     except (Dataset.DoesNotExist, mongoengine.errors.ValidationError):
         return error(f'Dataset {d_id} not found')
-    dataset.extras[APIgouvpt_EXTRAS_KEY] = apis
+    dataset.extras[APIGOUVPT_EXTRAS_KEY] = apis
     dataset.save()
     success(f'Imported {len(apis)} API(s) for {str(dataset)}')
 
@@ -32,14 +32,14 @@ def process_dataset(d_id, apis):
 @job('apigouvpt-load-apis')
 def apigouvpt_load_apis(self):
     '''Load dataset-related APIs from api.gouv.fr'''
-    r = requests.get(current_app.config['APIgouvpt_URL'], timeout=10)
+    r = requests.get(current_app.config['APIGOUVPT_URL'], timeout=10)
     r.raise_for_status()
 
     # cleanup existing mappings
     Dataset.objects.filter(**{
-        f'extras__{APIgouvpt_EXTRAS_KEY}__exists': True,
+        f'extras__{APIGOUVPT_EXTRAS_KEY}__exists': True,
     }).update(**{
-        f'unset__extras__{APIgouvpt_EXTRAS_KEY}': True,
+        f'unset__extras__{APIGOUVPT_EXTRAS_KEY}': True,
     })
 
     apis = r.json()
@@ -48,10 +48,10 @@ def apigouvpt_load_apis(self):
         d_ids = api.pop('datagouv_uuid', [])
         if not d_ids:
             continue
-        if not all([k in api for k in APIgouvpt_EXPECTED_FIELDS]):
+        if not all([k in api for k in APIGOUVPT_EXPECTED_FIELDS]):
             error(f'Missing field in payload: {api}')
             continue
-        if api['openness'] not in current_app.config.get('APIgouvpt_ALLOW_OPENNESS', []):
+        if api['openness'] not in current_app.config.get('APIGOUVPT_ALLOW_OPENNESS', []):
             continue
         for d_id in d_ids:
             if api not in datasets_apis[d_id]:
