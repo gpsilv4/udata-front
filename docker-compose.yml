@@ -1,7 +1,7 @@
 version: "3"
 services:
     db:
-        image: mongo:3.6
+        image: mongo:3.2
         volumes:
           - ./data/db:/data/db
           #- ./data/dump:/dump
@@ -19,11 +19,11 @@ services:
         ports:
           - "6379:6379"
 
-#    udata:
-#        build: .
-#        volumes:
-#          - ./udata-fs:/udata/fs
-#          - .:/src/gouvpt
-#        network_mode: "host"
-#        ports:
-#         - "7000:7000"
+    udata:
+        build: .
+        volumes:
+          - ./udata-fs:/udata/fs
+          - .:/src/gouvpt
+        network_mode: "host"
+        #ports:
+        # - "7000:7000"
