@@ -50,3 +50,6 @@ werkzeug==0.16.1
     # via
     #   -c requirements/udata.pip
     #   flask
+markdown==3.4.1
+uwsgi==2.0.21
+gevent==22.10.2

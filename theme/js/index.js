@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 
 import "./dsfr";
-import * as dsfr from "@gouvpt/dsfr/dist/dsfr/dsfr.module";
+import * as dsfr from "@gouvfr/dsfr/dist/dsfr/dsfr.module";
 
 import Threads from "./components/discussions/threads.vue";
 import MenuSearch from "./components/search/menu-search.vue";
