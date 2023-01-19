@@ -20,6 +20,7 @@ case $1 in
         uwsgi --emperor /udata/uwsgi/
         ;;
     front)
+        udata collect -ni /udata/public
         uwsgi /udata/uwsgi/front.ini
         ;;
     worker)
