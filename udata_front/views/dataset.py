@@ -1,7 +1,7 @@
 from collections import defaultdict, OrderedDict
 
 from flask import abort, request, url_for, redirect
-from werkzeug.contrib.atom import AtomFeed
+from feedgenerator.django.utils.feedgenerator import Atom1Feed
 
 from udata.models import Reuse, Follow
 from udata.core.dataset.models import Dataset, RESOURCE_TYPES, get_resource
@@ -20,7 +20,7 @@ blueprint = I18nBlueprint('datasets', __name__, url_prefix='/datasets')
 
 @blueprint.route('/recent.atom')
 def recent_feed():
-    feed = AtomFeed(_('Last datasets'),
+    feed = Atom1Feed(_('Last datasets'),
                     feed_url=request.url, url=request.url_root)
     datasets = (Dataset.objects.visible().order_by('-created_at')
                 .limit(current_site.feed_size))

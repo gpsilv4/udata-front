@@ -1,10 +1,10 @@
-from jinja2 import contextfilter
+from jinja2 import pass_context
 
 from udata_front.frontend import front
 
 
 @front.app_template_filter()
-@contextfilter
+@pass_context
 def permissions(ctx, resources):
     '''Return permissions for resources'''
     permissions = {}

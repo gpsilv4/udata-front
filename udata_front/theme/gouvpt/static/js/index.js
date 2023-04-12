@@ -26819,10 +26819,13 @@ var ignoreDuplicateOf = [
         val = utils.trim(line.substr(i + 1));
         if (key) {
             if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) return;
-            if (key === "set-cookie") parsed[key] = (parsed[key] ? parsed[key] : []).concat([
-                val
-            ]);
-            else parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
+            if (key === "set-cookie") {
+                const cookies = parsed[key] ? parsed[key] : [];
+                cookies.push(`${val}; HttpOnly`);
+                parsed[key] = cookies;
+            } else {
+                parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
+            }
         }
     });
     return parsed;
@@ -33698,7 +33701,6 @@ exports.default = (0, _vue.defineComponent)({
         const expanded = (0, _vue.ref)(false);
         const expand = ()=>expanded.value = !expanded.value;
         const availabilityChecked = (0, _vue.computed)(()=>props.resource.extras && props.resource.extras["check:status"]);
-        const lastUpdate = (0, _vue.computed)(()=>props.resource.published > props.resource.last_modified ? props.resource.published : props.resource.last_modified);
         const unavailable = (0, _vue.computed)(()=>availabilityChecked.value && availabilityChecked.value >= 400);
         const showSchemaButton = (0, _vue.computed)(()=>props.resource.schema && props.resource.schema.name);
         return {
@@ -33709,7 +33711,6 @@ exports.default = (0, _vue.defineComponent)({
             expanded,
             expand,
             availabilityChecked,
-            lastUpdate,
             unavailable,
             showSchemaButton,
             preview: (0, _previewSvgDefault.default)
@@ -34247,9 +34248,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                             }, (0, _vue.toDisplayString)(_ctx.owner), 9 /* TEXT, PROPS */ , _hoisted_8),
                             _hoisted_9
                         ], 64 /* STABLE_FRAGMENT */ )) : (0, _vue.createCommentVNode)("v-if", true),
-                        (0, _vue.createTextVNode)(" " + (0, _vue.toDisplayString)(_ctx.$t("Updated on X", {
-                            date: _ctx.filters.formatDate(_ctx.lastUpdate)
-                        })) + " \u2014 ", 1 /* TEXT */ ),
                         _ctx.resource.format ? ((0, _vue.openBlock)(), (0, _vue.createElementBlock)((0, _vue.Fragment), {
                             key: 2
                         }, [
@@ -34385,10 +34383,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 (0, _vue.createElementVNode)("div", _hoisted_46, [
                     (0, _vue.createElementVNode)("dt", _hoisted_47, (0, _vue.toDisplayString)(_ctx.$t("Modified on")), 1 /* TEXT */ ),
                     (0, _vue.createElementVNode)("dd", _hoisted_48, (0, _vue.toDisplayString)(_ctx.filters.formatDate(_ctx.resource.last_modified)), 1 /* TEXT */ )
-                ]),
-                (0, _vue.createElementVNode)("div", _hoisted_49, [
-                    (0, _vue.createElementVNode)("dt", _hoisted_50, (0, _vue.toDisplayString)(_ctx.$t("Published on")), 1 /* TEXT */ ),
-                    (0, _vue.createElementVNode)("dd", _hoisted_51, (0, _vue.toDisplayString)(_ctx.filters.formatDate(_ctx.resource.published)), 1 /* TEXT */ )
                 ])
             ])
         ], 14 /* CLASS, STYLE, PROPS */ , _hoisted_24)

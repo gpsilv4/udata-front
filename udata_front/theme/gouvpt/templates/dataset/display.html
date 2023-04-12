@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block content %}
-{% cache cache_duration, 'dataset-content', dataset.id|string, reuses.page|string, g.lang_code, current_user.slug or 'anonymous', dataset.last_modified|string %}
+{% cache cache_duration, 'dataset-toolbar', dataset.id|string, g.lang_code, dataset.last_modified|string %}
 
 {{ breadcrumb(self,
     breadcrum_class=breadcrum_class,

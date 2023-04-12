@@ -1,10 +1,10 @@
 version: "3"
 services:
     db:
-        image: mongo:3.2
+        image: mongo:4.2
         volumes:
-          - ./data/db:/data/db
-          #- ./data/dump:/dump
+          #- ./data/db:/data/db
+          - ./data/dump:/dump
         ports:
         - "27017:27017"
 

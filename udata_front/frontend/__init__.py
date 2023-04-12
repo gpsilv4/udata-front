@@ -82,7 +82,13 @@ def init_app(app):
     from udata.auth import security
     from udata_front.forms import ExtendedRegisterForm, ExtendedSendConfirmationForm, ExtendedForgotPasswordForm
     with app.app_context():
-        security._state.register_form = ExtendedRegisterForm
-        security._state.confirm_register_form = ExtendedRegisterForm
-        security._state.send_confirmation_form = ExtendedSendConfirmationForm
-        security._state.forgot_password_form = ExtendedForgotPasswordForm
+        if hasattr(security, '_state'):
+            security._state.register_form = ExtendedRegisterForm
+            security._state.confirm_register_form = ExtendedRegisterForm
+            security._state.send_confirmation_form = ExtendedSendConfirmationForm
+            security._state.forgot_password_form = ExtendedForgotPasswordForm
+        else:
+            security.register_form = ExtendedRegisterForm
+            security.confirm_register_form = ExtendedRegisterForm
+            security.send_confirmation_form = ExtendedSendConfirmationForm
+            security.forgot_password_form = ExtendedForgotPasswordForm
