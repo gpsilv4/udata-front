@@ -73,7 +73,7 @@ tomli==2.0.1
     #   pytest
 webencodings==0.5.1
     # via bleach
-wheel==0.36.2
+wheel==0.40.0
     # via
     #   -r requirements/develop.in
     #   pip-tools
@@ -92,3 +92,4 @@ wtforms-json==0.3.3
     #   -r requirements/install.in
 markdown==3.4.1
 owslib==0.18.0
+setuptools==66.1.1
