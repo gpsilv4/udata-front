@@ -201,8 +201,8 @@ class CkanPTBackend(BaseBackend):
 
         dataset.tags.append(urlparse(self.source.url).hostname)
         
-        dataset.created_at = data['metadata_created']
-        dataset.last_modified = data['metadata_modified']
+        dataset.created_at_internal = data['metadata_created']
+        dataset.last_modified_internal = data['metadata_modified']
 
         dataset.frequency = 'unknown'
         dataset.extras['ckan:name'] = data['name']
@@ -304,7 +304,7 @@ class CkanPTBackend(BaseBackend):
             resource.hash = res.get('hash')
             resource.created = res['created']
             resource.modified = res['last_modified']
-            resource.published = resource.published or resource.created
+            #resource.published = resource.published or resource.created
 
         # Clean up old resources removed from source
         for resource_id in current_resources:

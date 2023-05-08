@@ -48,7 +48,7 @@ class PortalAmbienteBackend(BaseBackend):
         dataset.description = item.get('description')
 
         if kwargs['date']:
-            dataset.created_at = kwargs['date']
+            dataset.created_at_internal = kwargs['date']
 
         # Force recreation of all resources
         dataset.resources = []

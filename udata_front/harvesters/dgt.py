@@ -73,7 +73,7 @@ class DGTBackend(BaseBackend):
         dataset.description = item['description']
 
         if item.get('date'):
-            dataset.created_at = item['date']
+            dataset.created_at_internal = item['date']
 
         for keyword in item.get('keywords'):
             dataset.tags.append(keyword)
