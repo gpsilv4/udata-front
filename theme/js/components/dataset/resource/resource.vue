@@ -191,7 +191,7 @@ export default defineComponent({
     const expanded = ref(false);
     const expand = () => expanded.value = !expanded.value;
     const availabilityChecked = computed(() => props.resource.extras && props.resource.extras['check:status']);
-    const lastUpdate = computed(() => props.resource.published > props.resource.last_modified ? props.resource.published : props.resource.last_modified);
+    const lastUpdate = computed(() => props.resource.last_modified);
     const unavailable = computed(() => availabilityChecked.value && availabilityChecked.value >= 400);
     const showSchemaButton = computed(() => props.resource.schema && props.resource.schema.name);
     return {

@@ -3,7 +3,7 @@ import requests
 
 from flask import request, redirect, url_for, current_app, abort
 from mongoengine.errors import DoesNotExist
-from werkzeug.contrib.atom import AtomFeed
+from feedgenerator.django.utils.feedgenerator import Atom1Feed
 
 from udata.app import cache
 from udata.core.activity.models import Activity
@@ -42,7 +42,7 @@ def inject_site():
 def activity_feed():
     activity_keys = request.args.getlist('key')
 
-    feed = AtomFeed(
+    feed = Atom1Feed(
         current_app.config.get('SITE_TITLE'), feed_url=request.url,
         url=request.url_root)
     activities = (Activity.objects.order_by('-created_at')

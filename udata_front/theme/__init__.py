@@ -9,7 +9,7 @@ from flask import g, current_app
 from flask_themes2 import (
     Themes, Theme, render_theme_template, get_theme
 )
-from jinja2 import contextfunction
+from jinja2 import pass_context
 from udata import assets
 
 
@@ -29,7 +29,7 @@ def get_current_theme():
 current = LocalProxy(get_current_theme)
 
 
-@contextfunction
+@pass_context
 def theme_static_with_version(ctx, filename, external=False):
     '''Override the default theme static to add cache burst'''
     if current_app.theme_manager.static_folder:
@@ -65,8 +65,8 @@ class ConfigurableTheme(Theme):
         super(ConfigurableTheme, self).__init__(path)
 
         self.variants = self.info.get('variants', [])
-        if 'gouvfr' not in self.variants:
-            self.variants.insert(0, 'gouvfr')
+        if 'gouvpt' not in self.variants:
+            self.variants.insert(0, 'gouvpt')
         self.context_processors = {}
 
     @property
@@ -92,7 +92,7 @@ class ConfigurableTheme(Theme):
         variant = current_app.config['THEME_VARIANT']
         if variant not in self.variants:
             log.warning('Unkown theme variant: %s', variant)
-            return 'gouvfr'
+            return 'gouvpt'
         else:
             return variant
 
@@ -145,14 +145,14 @@ def context(name):
 
 
 def init_app(app):
-    app.config.setdefault('THEME_VARIANT', 'gouvfr')
+    app.config.setdefault('THEME_VARIANT', 'gouvpt')
 
     themes.init_themes(app, app_identifier='udata', loaders=[themes_loader])
     # Load all theme assets
     try:
         theme = app.theme_manager.themes[app.config['THEME']]
     except KeyError:
-        theme = app.theme_manager.themes['gouvfr']
+        theme = app.theme_manager.themes['gouvpt']
     prefix = '/'.join(('_themes', theme.identifier))
     app.config['STATIC_DIRS'].append((prefix, theme.static_path))
 

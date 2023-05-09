@@ -1,5 +1,5 @@
 from flask import abort, request, url_for
-from werkzeug.contrib.atom import AtomFeed
+from feedgenerator.django.utils.feedgenerator import Atom1Feed
 
 from udata_front.views.base import SearchView, DetailView
 from udata.i18n import I18nBlueprint, lazy_gettext as _
@@ -17,7 +17,7 @@ blueprint = I18nBlueprint('reuses', __name__, url_prefix='/reuses')
 
 @blueprint.route('/recent.atom')
 def recent_feed():
-    feed = AtomFeed(_('Last reuses'),
+    feed = Atom1Feed(_('Last reuses'),
                     feed_url=request.url, url=request.url_root)
     reuses = Reuse.objects.visible().order_by('-created_at').limit(15)
     for reuse in reuses:
