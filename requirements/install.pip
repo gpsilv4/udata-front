@@ -54,3 +54,4 @@ markdown==3.4.1
 uwsgi==2.0.21
 gevent==22.10.2
 owslib==0.18.0
+pytz==2019.3
