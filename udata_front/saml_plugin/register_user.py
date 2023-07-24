@@ -14,7 +14,7 @@ from wtforms import ValidationError
 
 from udata.forms import fields, validators
 from udata.models import datastore
-from udata import theme
+from udata_front import theme
 
 from .saml_govpt import autenticacao_gov
 

@@ -62,7 +62,7 @@ setup(
         ],
         'udata.views': [
             'gouvpt_faqs = udata_front.faqs_plugin',
-            #'gouvpt_saml = gouvpt.saml_plugin',
+            'gouvpt_saml = udata_front.saml_plugin',
         ],
         'udata.tasks': [
             'front = udata_front.tasks',

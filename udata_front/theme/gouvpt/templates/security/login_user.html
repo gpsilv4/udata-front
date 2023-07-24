@@ -31,6 +31,18 @@
                             {% endif %}
                         </div>
                 </form>
+
+                <p class="fr-hr-or"><span class="fr-hr-or-text">{{ _('or') }}</span></p>
+                <div class="fr-connect-group">
+                    <a title="{{ _('Register') }}"
+                        id="sbmtLoginCC"
+                        href="{{ url_for('saml.sp_initiated') }}"
+                        class="btn btn-primary btn-block btn-lg"
+                        >
+                        <img src="{{ theme_static('img/cc.png') }}" />
+                    </a>
+                </div>
+
             </div>
         </div>
         <div class="fr-grid-row">

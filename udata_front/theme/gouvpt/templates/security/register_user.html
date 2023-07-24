@@ -32,6 +32,23 @@
                             </button>
                         </div>
                 </form>
+
+                <div class="text-align-center">
+                    <p class="fr-hr-or"><span class="fr-hr-or-text">{{ _('or') }}</span></p>
+                        <div class="fr-connect-group">
+                            <a title="{{ _('Register') }}"
+                                id="sbmtLoginCC"
+                                href="{{ url_for('saml.sp_initiated') }}"
+                                class="btn btn-primary btn-block btn-lg"
+                                >
+                                <img src="{{ theme_static('img/cc.png') }}" />
+                            </a>
+                            <p class="info">
+                                *Utilize o Cartão de Cidadão ou a Chave Móvel Digital para fazer a sua autenticação.
+                            </p>
+                        </div>
+                </div>
+
             </div>
         </div>
     </div>

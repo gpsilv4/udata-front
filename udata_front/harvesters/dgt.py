@@ -28,9 +28,9 @@ class DGTBackend(BaseBackend):
                 "resources": each.get("link"),
                 "keywords": each.get("keyword")
             }
-            if each.get("publicationDate"):
-                item["date"] = datetime.strptime(each.get("publicationDate"),
-                                                 "%Y-%m-%d")
+            #if each.get("publicationDate"):
+            #    item["date"] = datetime.strptime(each.get("publicationDate"),
+            #                                     "%Y-%m-%d")
 
             links = []
             resources = item.get("resources")

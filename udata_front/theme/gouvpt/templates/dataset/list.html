@@ -79,5 +79,24 @@
         {{ paginator(datasets) }}
         {% endif %}
     </noscript>
+
+    <div class="fr-col-md-6 fr-col-12 fr-my-3w fr-my-md-3">
+        <h3>{{ _('Actions') }}</h3>
+        <ul class="nav-list fr-ml-n3v">
+            <li class="fr-my-2w">
+                <a
+                    href="{{ url_for('site.datasets_csv', q=q, organization=request.args.get('organization'), 
+                                                          tag=request.args.get('tag'), 
+                                                          format=request.args.get('format'), 
+                                                          license=request.args.get('license'), 
+                                                          geozone=request.args.get('geozone'), 
+                                                          granularity=request.args.get('granularity')) }}"
+                    class="nav-link nav-link--no-icon fr-raw-link text-decoration-none fr-link fr-link--icon-left fr-icon-arrow-right-s-line"
+                >
+                    <span class="text-decoration-underline">{{ _('Download list of datasets as csv file') }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </section>
 {% endblock %}
