@@ -497,7 +497,7 @@ msgstr "métricas"
 #: udata_front/theme/gouvpt/templates/post/display.html:87
 #: udata_front/theme/gouvpt/templates/reuse/display.html:127
 msgid "Actions"
-msgstr "Acções"
+msgstr "Ações"
 
 #: udata_front/theme/gouvpt/templates/page.html:47
 msgid "Suggest a modification"

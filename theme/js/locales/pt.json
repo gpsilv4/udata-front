@@ -151,5 +151,8 @@
   "Resources documentation missing": "Documentação de recursos ausente",
   "data.gouv.fr allows you to validate your files based on a schema and correct the possible errors.": "",
   "Data schemas describe data models: what are the fields, how are data shown, what are the available values, etc. See schema.data.gouv.fr": "",
-  "Licenses define reuse rules for published datasets. See page data.gouv.fr/licences": ""
+  "Licenses define reuse rules for published datasets. See page data.gouv.fr/licences": "",
+  "Error getting {type}.": "",
+  "Error getting search results.": "",
+  "An error occurred while featuring this subject.": ""
 }
