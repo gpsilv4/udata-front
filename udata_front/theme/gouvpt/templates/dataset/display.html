@@ -1,3 +1,8 @@
+<script type="text/javascript" src="{{ theme_static('js/jquery-3.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ theme_static('js/xlsx.full.min.js') }}"></script> 
+<script type="text/javascript" src="{{ theme_static('js/canvas-datagrid.js') }}"></script>
+<script type="text/javascript" src="{{ theme_static('js/datasets.js') }}"></script> 
+
 {% extends theme('layouts/1-column.html') %}
 {% from theme('macros/follow.html') import follow_btn with context %}
 {% from theme('macros/integrate.html') import integrate_btn with context %}
@@ -437,6 +442,30 @@
         </div>
         {# Maybe put this after the real description instead of after the resource cards ? Not sure #}
         {{ hook('dataset.display.after-description') }}
+    </div>
+    {# Resources section #} 
+    {% set resource_tabs = ( 
+        ('preview', _('Preview'), ( 
+            dataset.resources|selectattr('format', 'equalto', 'ods')|list + 
+            dataset.resources|selectattr('format', 'equalto', 'csv')|list + 
+            dataset.resources|selectattr('format', 'equalto', 'xlsm')|list + 
+            dataset.resources|selectattr('format', 'equalto', 'xlsx')|list +
+            dataset.resources|selectattr('format', 'equalto', 'xls')|list
+            )|selectattr('preview_url', 'none')|list,{}),   
+    )%}
+    {# end resources #}
+    <div class="fr-container">
+        {% set count_excel_resources = dataset.resources | selectattr('format', 'in', ['ods', 'csv', 'xlsm', 'xlsx', 'xls']) | list | length %}
+        <h2 id="resources" class="fr-h2">{{ _('Pre-Visualização') }} <sup class="resources-count">{{count_excel_resources}}</sup></h2>
+        <div class="ressources-files fr-my-4w vuejs">
+            <div class="tab-content">
+                {% for tab_id, label, resources, kwargs in resource_tabs %} 
+                    <div class="tab-pane" id="{{tab_id}}"> 
+                        {% include theme('dataset/resources-preview.html') %}
+                    </div>
+                {% endfor %} 
+            </div>
+        </div>
     </div>
 </section>
 {% block community %}
