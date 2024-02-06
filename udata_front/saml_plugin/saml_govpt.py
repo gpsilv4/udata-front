@@ -63,7 +63,7 @@ def saml_client_for(metadata_file):
                 # Sign authn requests
                 'authn_requests_signed': True,
                 'logout_requests_signed': True,
-                'want_assertions_signed': False,
+                'want_assertions_signed': True,
                 'want_response_signed': True,
             },
         },
@@ -122,10 +122,12 @@ def sp_initiated():
 #################################################################
 
 
+# Importações omitidas para brevidade
+import base64
+
 @autenticacao_gov.route('/saml/sso', methods=['POST'])
 @csrf.exempt
 def idp_initiated():
-
     user_email = None
     user_nic = None
     first_name = None
@@ -136,30 +138,37 @@ def idp_initiated():
     for server in auth_servers:
         saml_client = saml_client_for(server)
         try:
-            authn_response = saml_client.parse_authn_request_response(
-                request.form['SAMLResponse'],
-                entity.BINDING_HTTP_POST)
+            decoded_response = base64.b64decode(request.form['SAMLResponse']).decode('utf-8')
+            authn_response = saml_client.parse_authn_request_response(decoded_response, entity.BINDING_HTTP_POST)
+            root = ET.fromstring(decoded_response)  # Tente analisar a resposta decodificada para diagnóstico
         except sigver.MissingKey:
             continue
+        except SignatureError as se:
+            current_app.logger.error(f"SignatureError: {se}")
+            # Adicione qualquer ação necessária em caso de erro na assinatura
+        except ET.ParseError as pe:
+            current_app.logger.error(f"XML Parse Error: {pe}")
+            current_app.logger.error(f"Invalid XML: {decoded_response}")
+            # Adicione qualquer ação necessária em caso de erro de análise XML
+        except Exception as e:
+            current_app.logger.error(f"Error processing XML: {e}")
+            # Adicione qualquer ação necessária em caso de outros erros relacionados ao XML
         else:
             break
 
-    root = ET.fromstring(str(authn_response))
     ns = {'assertion': 'urn:oasis:names:tc:SAML:2.0:assertion',
           'atributos': 'http://autenticacao.cartaodecidadao.pt/atributos'}
 
-    for child in root.find('assertion:Assertion', ns).find('assertion:AttributeStatement', ns):
+    for child in root.find('.//assertion:AttributeStatement', ns):
         try:
             if child.attrib['Name'] == 'http://interop.gov.pt/MDC/Cidadao/CorreioElectronico':
-                user_email = child.find('assertion:AttributeValue', ns).text
+                user_email = child.find('.//assertion:AttributeValue', ns).text
             elif child.attrib['Name'] == 'http://interop.gov.pt/MDC/Cidadao/NICCifrado':
-                user_nic = child.find('assertion:AttributeValue', ns).text
+                user_nic = child.find('.//assertion:AttributeValue', ns).text
             elif child.attrib['Name'] == 'http://interop.gov.pt/MDC/Cidadao/NomeProprio':
-                first_name = child.find('assertion:AttributeValue', ns).text
+                first_name = child.find('.//assertion:AttributeValue', ns).text
             elif child.attrib['Name'] == 'http://interop.gov.pt/MDC/Cidadao/NomeApelido':
-                last_name = child.find('assertion:AttributeValue', ns).text
-            else:
-                pass
+                last_name = child.find('.//assertion:AttributeValue', ns).text
         except AttributeError:
             pass
 

@@ -19,7 +19,7 @@ from udata_front import theme
 from .saml_govpt import autenticacao_gov
 
 def unique_user_email(form, field):
-    if datastore.get_user(field.data) is not None:
+    if datastore.find_user(email=field.data) is not None:
         msg = get_message('EMAIL_ALREADY_ASSOCIATED', email=field.data)[0]
         raise ValidationError(msg)
 
@@ -40,9 +40,9 @@ def register():
     #Create a new user
     if request.method == 'POST' and form.validate():
         data = {
-            'first_name': str(request.values.get('first_name').encode('utf-8')).title(),
-            'last_name': str(request.values.get('last_name').encode('utf-8')).title(),
-            'email': str(request.values.get('email').encode('utf-8')),
+            'first_name': str(request.values.get('first_name')).title(),
+            'last_name': str(request.values.get('last_name')).title(),
+            'email': str(request.values.get('email')),
         }
 
         if(request.values.get('user_nic')):
