@@ -14,6 +14,18 @@ if [ "$(ls -A /src)" ]; then
     done
 fi
 
+# Alterar MAIL_DEFAULT_SENDER no arquivo /python3.7/.../udata/settings.py
+settings_file="/usr/local/lib/python3.7/site-packages/udata/settings.py"
+search_string="MAIL_DEFAULT_SENDER = 'webmaster@udata'"
+replace_string="MAIL_DEFAULT_SENDER = 'noreply.dados.gov@ama.gov.pt'"
+
+if [ -f "$settings_file" ]; then
+    sed -i "s/$search_string/$replace_string/g" "$settings_file"
+    echo "Substituição concluída com sucesso."
+else
+    echo "O arquivo $settings_file não foi encontrado."
+fi
+
 case $1 in
     uwsgi)
         udata collect -ni /udata/public
