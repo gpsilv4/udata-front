@@ -49,30 +49,39 @@ gouvpt_menu = nav.Bar('gouvpt_menu', [
     nav.Item(_('Getting started on dados.gov.pt'), None, items=[
         nav.Item(
             _('Sobre dados abertos'), 
-            'gouvpt_faq.faq', 
-            {'section': 'about_opendata'}
-        ),
+            'gouvpt.show_page',
+            args={'slug': 'faqs/about_opendata'}),
         nav.Item(
             _('Sobre o dados.gov'), 
-            'gouvpt_faq.faq', 
-            {'section': 'about_dadosgov'}
-        ),
+            'gouvpt.show_page',
+            args={'slug': 'faqs/about_dadosgov'}),
         nav.Item(
             _('Publicar dados'), 
-            'gouvpt_faq.faq', 
-            {'section': 'publish'}
-        ),
+            'gouvpt.show_page',
+            args={'slug': 'faqs/publish'}),
         nav.Item(
             _('Reutilizar dados'), 
-            'gouvpt_faq.faq', 
-            {'section': 'reuse'}
-        ),
+            'gouvpt.show_page',
+            args={'slug': 'faqs/reuse'}),
     ]),
     nav.Item(_('Documentação'), None, items=[
-        nav.Item(_('Licences'), 'gouvpt_faq.faq', {'section': 'licenses'}),
-        nav.Item(_('Terms of use'), 'site.terms'),
-        nav.Item(_('Acessibilidade'), 'gouvpt_faq.faq', {'section': 'acessibilidade'}),
-        nav.Item(_('API'), 'gouvpt_faq.docapi'),
+        nav.Item(
+            _('Licences'),
+            'gouvpt.show_page', 
+            args={'slug': 'faqs/licenses'}),
+        nav.Item(
+            _('Terms of use'),
+            'gouvpt.show_page', 
+            args={'slug': 'faqs/terms'}),
+        nav.Item(
+            _('Acessibilidade'),
+            'gouvpt.show_page', 
+            args={'slug': 'faqs/acessibilidade'}),
+        nav.Item(
+            _('API Tutorial'),
+            'gouvpt.show_page', 
+            args={'slug': 'api-tutorial'}),
+        nav.Item(_('Referência da API'), 'gouvpt_faq.docapi'),
     ]),
     nav.Item(_('News'), 'posts.list'),
     nav.Item(_('Contact us'), 'gouvpt_faq.contact'),
@@ -81,7 +90,7 @@ gouvpt_menu = nav.Bar('gouvpt_menu', [
 theme.menu(gouvpt_menu)
 
 opendata_links = [
-    #nav.Item(_('Featured topics'), 'gouvpt.show_page', args={'slug': 'thematiques-a-la-une'}),
+    nav.Item(_('Featured topics'), 'gouvpt.show_page', args={'slug': 'temas-em-destaque'}),
     #nav.Item(_('Reference Data'), 'gouvpt.show_page', args={'slug': 'spd/reference'}),
     nav.Item(_('Portal for European data'), None, url='https://data.europa.eu'),
     nav.Item(_('Data'), 'datasets.list'),
@@ -105,9 +114,10 @@ nav.Bar('gouvpt_opendata', opendata_links)
 
 
 support_links = [
-    nav.Item(_("Platform's documentation"), 'gouvpt_faq.faq', {'section': 'about_opendata'}),
+    nav.Item(_("Platform's documentation"), 'gouvpt.show_page', args={'slug': 'faqs/about_opendata'}),
     #nav.Item(_("Portal's API"), None, url=current_app.config.get('API_DOC_EXTERNAL_LINK', '#')),
-    nav.Item(_("Portal's API"), 'gouvpt_faq.docapi'),
+    nav.Item(_('API Tutorial'), 'gouvpt.show_page', args={'slug': 'api-tutorial'}),
+    nav.Item(_("Referência da API"), 'gouvpt_faq.docapi'),
     #nav.Item(_('Open data guides'), None, url=current_app.config.get('ETALAB_GUIDES_URL', '#')),
     nav.Item(_('Contact us'), 'gouvpt_faq.contact'),
 ]
@@ -115,12 +125,11 @@ support_links = [
 nav.Bar('gouvpt_support', support_links)
 
 footer_links = [
-    nav.Item(_('Licences'), 'gouvpt_faq.faq', {'section': 'licenses'}),
-    nav.Item(_('Terms of use'), 'site.terms'),
+    nav.Item(_('Licences'), 'gouvpt.show_page', args={'slug': 'faqs/licenses'}),
+    nav.Item(_('Terms of use'), 'gouvpt.show_page', args={'slug': 'faqs/terms'}),
     #nav.Item(_('Tracking and privacy'), 'gouvpt.suivi'),
-    #nav.Item(_('Accessibility: partially compliant'),
-    #         'gouvpt.show_page', args={'slug': 'legal/accessibility'}),
-    nav.Item(_('Acessibilidade'), 'gouvpt_faq.faq', {'section': 'acessibilidade'}),
+    nav.Item(_('Acessibilidade'), 
+             'gouvpt.show_page', args={'slug': 'faqs/acessibilidade'}),
 ]
 
 nav.Bar('gouvpt_footer', footer_links)

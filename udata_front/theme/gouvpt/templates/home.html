@@ -18,17 +18,17 @@
                 <h1 class="fr-mt-0 fr-mb-2w">{{ _('Open platform for Portuguese public data') }}</h1>
                 <div>
                     <h2 class="fr-text--md fr-my-0">{{ _('Featured topics') }}</h2>
-                    <a href="{{ url_for('topics.display', topic='governo-e-administracao-publica') }}"
+                    <a href="{{ url_for('gouvpt.show_page', slug='topics/high_ value_datasets') }}"
                         class="btn-venti fr-my-2w bg-orange-100">
                         Dados relativos a
-                        <strong>Governo e Administração Pública</strong>
+                        <strong>Dados de Elevado Valor</strong>
                     </a>
-                    <a href="{{ url_for('topics.display', topic='populacao-e-sociedade') }}"
+                    <a href="{{ url_for('gouvpt.show_page', slug='topics/populacao_sociedade') }}"
                         class="btn-venti fr-my-2w bg-blue-450">
                         Dados relativos a
                         <strong>População e Sociedade</strong>
                     </a>
-                    <a href="{{ url_for('topics.display', topic='economia-e-financas') }}"
+                    <a href="{{ url_for('gouvpt.show_page', slug='topics/economia_financas') }}"
                         class="btn-venti bg-green-400">
                         Dados relativos a
                     <strong>Economia e Finanças</strong>
@@ -38,16 +38,15 @@
                         class="btn-venti bg-green-400">
                         Données relatives au
                         <strong>Logement et à l'Urbanisme</strong>
-                    </a>
+                    </a>--> 
                     <div class="fr-grid-row justify-center fr-mt-2w">
                         <a
-                            href="{{ url_for('gouvpt.show_page', slug='thematiques-a-la-une') }}"
+                            href="{{ url_for('gouvpt.show_page', slug='temas-em-destaque') }}"
                             class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line fr-btn--icon-right"
                         >
                             {{ _('All featured topics') }}
                         </a>
                     </div>
-                    -->                    
                 </div>
             </div>
             <div class="fr-col-12 fr-col-offset-lg-1 fr-col-lg-6">
