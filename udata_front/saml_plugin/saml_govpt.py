@@ -17,7 +17,9 @@ from saml2.client import Saml2Client
 from saml2.config import Config as Saml2Config
 from saml2.saml import NameID, NAMEID_FORMAT_UNSPECIFIED
 from saml2.pack import http_form_post_message
+from saml2.sigver import SignatureError
 
+import base64
 import xml.etree.ElementTree as ET
 
 from .faa_level import FAAALevel, LogoutUrl
@@ -122,9 +124,6 @@ def sp_initiated():
 #################################################################
 
 
-# Importações omitidas para brevidade
-import base64
-
 @autenticacao_gov.route('/saml/sso', methods=['POST'])
 @csrf.exempt
 def idp_initiated():
@@ -132,15 +131,27 @@ def idp_initiated():
     user_nic = None
     first_name = None
     last_name = None
+    root = None  # Inicialize root para evitar UnboundLocalError
 
     auth_servers = current_app.config.get('SECURITY_SAML_IDP_METADATA').split(',')
 
     for server in auth_servers:
         saml_client = saml_client_for(server)
         try:
-            decoded_response = base64.b64decode(request.form['SAMLResponse']).decode('utf-8')
+            #decoded_response = base64.b64decode(request.form['SAMLResponse']).decode('utf-8')
+            decoded_response = base64.b64decode(request.form['SAMLResponse'])
+            root = None
+            for codec in ['utf-8', 'ISO-8859-1']:  # Diferentes codecs
+                try:
+                    decoded_response_str = decoded_response.decode(codec)
+                    root = ET.fromstring(decoded_response_str)
+                    break
+                except UnicodeDecodeError:
+                    continue
+            if root is None:
+                raise ValueError("Não foi possível decodificar o XML com codecs disponíveis.")
             authn_response = saml_client.parse_authn_request_response(decoded_response, entity.BINDING_HTTP_POST)
-            root = ET.fromstring(decoded_response)  # Tente analisar a resposta decodificada para diagnóstico
+            root = ET.fromstring(decoded_response)  # Analisar a resposta decodificada para diagnóstico
         except sigver.MissingKey:
             continue
         except SignatureError as se:
@@ -154,7 +165,13 @@ def idp_initiated():
             current_app.logger.error(f"Error processing XML: {e}")
             # Adicione qualquer ação necessária em caso de outros erros relacionados ao XML
         else:
+            # Se nenhum servidor com assinatura válida for encontrado, retornar um erro
+            #return "Erro: Assinatura ausente ou inválida na resposta SAML", 400
             break
+    
+    #if root is None:
+        # Se não foi possível obter a raiz do XML, retornar um erro ou fazer qualquer ação necessária
+    #    return "Erro: Não foi possível obter a raiz do XML", 400
 
     ns = {'assertion': 'urn:oasis:names:tc:SAML:2.0:assertion',
           'atributos': 'http://autenticacao.cartaodecidadao.pt/atributos'}
@@ -174,7 +191,8 @@ def idp_initiated():
 
     data = {'email': user_email}
     extras = {'extras': {'auth_nic': user_nic}}
-    userUdata = datastore.find_user(**extras) or datastore.find_user(**data)
+    #userUdata = datastore.find_user(**extras) or datastore.find_user(**data)
+    userUdata = datastore.find_user(**data) or datastore.find_user(**extras)
 
     if not userUdata:
         # Redirects to new custom registration form

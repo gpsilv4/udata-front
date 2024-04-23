@@ -21,7 +21,6 @@ BANNER_HTML_CONTENT_FR = ''
 BANNER_HTML_CONTENT_PT = ''
 
 # Static pages from github repo
-#PAGES_GH_REPO_NAME = 'gpsilv4/docs.dados.gov.pt'
 PAGES_GH_REPO_NAME = 'amagovpt/docs.dados.gov.pt'
 PAGES_REPO_BRANCH = 'pages'
 
