@@ -1,0 +1,2 @@
+-r requirements/install.pip
+https://github.com/gpsilv4/udata-front/blob/release-v6.0.2/requirements/pysaml2-4.9.0.zip?raw=true
