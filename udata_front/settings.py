@@ -22,7 +22,10 @@ BANNER_HTML_CONTENT_PT = ''
 
 # Static pages from github repo
 PAGES_GH_REPO_NAME = 'amagovpt/docs.dados.gov.pt'
-PAGES_REPO_BRANCH = 'pages'
+#PAGES_GH_REPO_NAME = 'gpsilv4/docs.dados.gov.pt'
+PAGES_REPO_BRANCH = 'master'
+#PAGES_REPO_BRANCH = 'pages'
+#PAGES_REPO_BRANCH = 'LBC'
 
 # api.gouv.fr
 APIGOUVPT_URL = 'https://api.gouv.fr/api/v1/apis'
