@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: udata-front 2023.1\n"
+"Project-Id-Version: udata-front 2024.07\n"
 "Report-Msgid-Bugs-To: data.gouv@data.gouv.fr\n"
 "POT-Creation-Date: 2023-07-31 11:52+0100\n"
 "PO-Revision-Date: 2023-07-31 11:52+0100\n"

@@ -26,6 +26,19 @@ else
     echo "O arquivo $settings_file não foi encontrado."
 fi
 
+# Adicionar verificação para arquivos SVG no arquivo /python3.7/.../udata/core/dataset/api.py
+api_file="/usr/local/lib/python3.7/site-packages/udata/core/dataset/api.py"
+search_string="infos = handle_upload(storages.resources, prefix)"
+insert_string="        # Adicionar verificação para arquivos SVG\n        if infos['mime'] == 'image/svg+xml':\n            api.abort(415, 'Unsupported file type: SVG images are not allowed')"
+
+if [ -f "$api_file" ]; then
+    sed -i "/$search_string/a $insert_string" "$api_file"
+    echo "Código inserido com sucesso."
+else
+    echo "O arquivo $api_file não foi encontrado."
+fi
+
+
 case $1 in
     uwsgi)
         udata collect -ni /udata/public
